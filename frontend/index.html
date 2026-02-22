@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cloud Assignment Demo</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.status {
+  font-size: 18px;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.success {
+  color: #00ffcc;
+}
+
+.error {
+  color: #ff6b6b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🚀 Multi-Container App</h1>
+  <p id="msg">Connecting to backend...</p>
+  <div id="status" class="status"></div>
+</div>
+
+<script>
+fetch("http://localhost:5000/api")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("msg").innerText = data.message;
+    document.getElementById("status").innerText = "Backend connection successful";
+    document.getElementById("status").classList.add("success");
+  })
+  .catch(() => {
+    document.getElementById("msg").innerText = "Failed to reach backend";
+    document.getElementById("status").innerText = "Connection error";
+    document.getElementById("status").classList.add("error");
+  });
+</script>
+
+</body>
+</html>
